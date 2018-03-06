@@ -15,6 +15,8 @@
  */
 package com.nanoseat.api.web;
 
+import com.nanoseat.api.services.NanoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,10 +27,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
+	@Autowired
+	private NanoService nanoService;
+
 	@RequestMapping(value = "/")
 	public String index() {
 		return "index";
 	}
 
+	@RequestMapping(value = "/update-balance")
+	public String updateBalance() {
+		nanoService.updateBalances();
+		return "index";
+	}
+
+	@RequestMapping(value = "/check-sent")
+	public String checkSent() {
+		nanoService.checkUsersForSentBalance();
+		return "index";
+	}
 }
 // end::code[]

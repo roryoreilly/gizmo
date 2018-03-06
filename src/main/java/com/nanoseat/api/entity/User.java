@@ -32,14 +32,17 @@ public class User {
 	private String firstName;
 	private String balance;
 	private String account;
+	private String mostRecentSendHash;
+	private boolean isMoneySent;
 
 	private @Version @JsonIgnore Long version;
 
 	private User() {}
 
-	public User(String firstName, String balance, String account) {
+	public User(String firstName, String balance, String account, boolean isMoneySent) {
 		this.firstName = firstName;
 		this.balance = balance;
 		this.account = account;
+		this.isMoneySent = isMoneySent;
 	}
 }

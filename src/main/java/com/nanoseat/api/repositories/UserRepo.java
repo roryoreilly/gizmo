@@ -16,10 +16,10 @@
 package com.nanoseat.api.repositories;
 
 import com.nanoseat.api.entity.User;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends PagingAndSortingRepository<User, Long> {
-
+public interface UserRepo extends CrudRepository<User, Long>, UserRepoCustom {
 }
