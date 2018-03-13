@@ -36,7 +36,8 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.userRepo.save(new User("User 1",
 				"0",
 				"xrb_34tzxgtrxpkwxxp7bq7thdnk4mgqopy3bhnu8kopnfby7ofh4mowfxucj19o",
-				true));
+				true,
+				false));
 //		this.userRepo.save(new User("Seconds Guy", "0", "xrb_3rpnsxput4t6hffjcjp7rr9d4i9nhfsqutnfhbtm7t5t4xww497gzh9bgetm"));
 	}
 }

@@ -1,20 +1,8 @@
-/*
- * Copyright 2015 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.nanoseat.api.web;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nanoseat.api.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
@@ -25,6 +13,8 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Timer;
+
 @Component
 @RepositoryEventHandler(User.class)
 public class EventHandler {
@@ -33,15 +23,23 @@ public class EventHandler {
 
 	private final EntityLinks entityLinks;
 
+	private Gson gson;
+
 	@Autowired
 	public EventHandler(SimpMessagingTemplate websocket, EntityLinks entityLinks) {
 		this.websocket = websocket;
 		this.entityLinks = entityLinks;
+		gson = new GsonBuilder().create();
 	}
 
 	public void updateBalance() {
 		websocket.convertAndSend(
 				WebSocketConfiguration.MESSAGE_PREFIX + "/updateBalance", "Gizmo");
+	}
+
+	public void timerUpdate(String timer) {
+		websocket.convertAndSend(
+				WebSocketConfiguration.MESSAGE_PREFIX + "/timer", gson.toJson(timer));
 	}
 
 	@HandleAfterCreate
@@ -68,8 +66,9 @@ public class EventHandler {
 	 * @param user
 	 */
 	private String getPath(User user) {
-		return this.entityLinks.linkForSingleResource(user.getClass(),
+		String path = "http://localhost:8080" + this.entityLinks.linkForSingleResource(user.getClass(),
 				user.getId()).toUri().getPath();
+		System.out.println(path);
+		return path;
 	}
-
 }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@EnableScheduling
 public class NanoService {
     @Autowired
     private NanoClient client;
@@ -68,4 +67,5 @@ public class NanoService {
                 && transactionAmount.equals(baseAmount)
                 && transactionType.equals(baseType);
     }
+
 }

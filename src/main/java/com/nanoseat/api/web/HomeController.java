@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Greg Turnquist
  */
@@ -45,6 +47,11 @@ public class HomeController {
 	public String checkSent() {
 		nanoService.checkUsersForSentBalance();
 		return "index";
+	}
+
+	@RequestMapping(value = "/api/timer")
+	public String sendTime() {
+		return LocalDateTime.now().toString();
 	}
 }
 // end::code[]

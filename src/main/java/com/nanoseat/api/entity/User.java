@@ -34,15 +34,17 @@ public class User {
 	private String account;
 	private String mostRecentSendHash;
 	private boolean isMoneySent;
+	private boolean inHotSeat;
 
 	private @Version @JsonIgnore Long version;
 
 	private User() {}
 
-	public User(String firstName, String balance, String account, boolean isMoneySent) {
+	public User(String firstName, String balance, String account, boolean isMoneySent, boolean inHotSeat) {
 		this.firstName = firstName;
 		this.balance = balance;
 		this.account = account;
 		this.isMoneySent = isMoneySent;
+		this.inHotSeat = inHotSeat;
 	}
 }

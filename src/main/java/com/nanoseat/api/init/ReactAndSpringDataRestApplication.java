@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -35,6 +36,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan({"com.nanoseat.api,services", "com.nanoseat.api.web", "com.nanoseat.api.init"})
 @EnableJpaRepositories("com.nanoseat.api.repositories")
 @EntityScan({"com.nanoseat.api.entity"})
+@EnableScheduling
 public class ReactAndSpringDataRestApplication {
 
 	public static void main(String[] args) {
